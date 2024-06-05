@@ -1,0 +1,8 @@
+@use '@angular/material' as mat;
+
+@mixin mat-toolbar-override($theme) {
+  mat-toolbar {
+    background: mat.get-theme-color($theme, primary-container);
+    color: mat.get-theme-color($theme, on-primary-container);
+  }
+}

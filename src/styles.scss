@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@import "./material-override.theme";
 
 @include mat.core();
 
@@ -23,9 +24,17 @@ $app-theme--light: mat.define-theme((
 
 :root {
   @include mat.core-theme($app-theme--dark);
+  @include mat.toolbar-theme($app-theme--dark);
 
   @media (prefers-color-scheme: light) {
     @include mat.core-color($app-theme--light);
+    @include mat.toolbar-color($app-theme--light);
+
+    @include mat-toolbar-override($app-theme--light);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    @include mat-toolbar-override($app-theme--dark);
   }
 }
 
