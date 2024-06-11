@@ -1,0 +1,33 @@
+<ng-template #menu let-col>
+  <div cdkMenu [formGroup]="filterForm()">
+    <label class="context-menu__header-item">---- filters ----</label>
+    <button cdkMenuItem *ngIf="getFilter(col) != null" (click)="setFilter(col, null)">Reset filter</button>
+    @if (col.type === 'bool') {
+      <button cdkMenuItem *ngIf="getFilter(col) !== true" (click)="setFilter(col, true)">= true</button>
+      <button cdkMenuItem *ngIf="getFilter(col) !== false" (click)="setFilter(col, false)">= false</button>
+    }
+    <input *ngIf="col.type !== 'bool'" class="cdk-menu__input" placeholder="type to filter"
+           [formControlName]="col.field" (keydown)="$event.stopPropagation()">
+  </div>
+</ng-template>
+
+<table mat-table [dataSource]="dataSource" matSort>
+  <ng-container *ngFor="let column of columns(); trackBy:trackField" [matColumnDef]="column.field">
+    <th mat-header-cell [mat-sort-header]="column.field"
+        [cdkContextMenuTriggerFor]="menu"
+        [cdkContextMenuTriggerData]="{ $implicit: column}"
+        *matHeaderCellDef>
+      {{ getTitle(column) }}
+    </th>
+    <td mat-cell *matCellDef="let element">
+      @if (column.type === 'bool') {
+        <mat-icon *ngIf="isTrue(element[column.field])">check_box</mat-icon>
+      } @else {
+        {{ element[column.field] }}
+      }
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns();"></tr>
+</table>

@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @import "./material-override.theme";
+@import "./material-cdk.style";
 
 @include mat.core();
 
@@ -10,7 +11,7 @@ $app-theme--dark: mat.define-theme((
         tertiary: mat.$blue-palette,
     ),
     density: (
-        scale: 0,
+        scale: minimum,
     )
 ));
 
@@ -24,16 +25,24 @@ $app-theme--light: mat.define-theme((
 
 :root {
   @include mat.core-theme($app-theme--dark);
+  @include mat.icon-theme($app-theme--dark);
+  @include mat.menu-theme($app-theme--dark);
+  @include mat.table-theme($app-theme--dark);
   @include mat.toolbar-theme($app-theme--dark);
 
   @media (prefers-color-scheme: light) {
     @include mat.core-color($app-theme--light);
+    @include mat.icon-color($app-theme--light);
+    @include mat.menu-color($app-theme--light);
+    @include mat.table-color($app-theme--light);
     @include mat.toolbar-color($app-theme--light);
 
+    @include cdk-menu-color($app-theme--light);
     @include mat-toolbar-override($app-theme--light);
   }
 
   @media (prefers-color-scheme: dark) {
+    @include cdk-menu-color($app-theme--dark);
     @include mat-toolbar-override($app-theme--dark);
   }
 }
