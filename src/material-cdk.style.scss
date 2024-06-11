@@ -1,0 +1,61 @@
+@use '@angular/material' as mat;
+
+.cdk-menu {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 10rem;
+  max-width: 18rem;
+  font-family: var(--mat-menu-item-label-text-font);
+  line-height: var(--mat-menu-item-label-text-line-height);
+  font-size: var(--mat-menu-item-label-text-size);
+  font-weight: var(--mat-menu-item-label-text-weight);
+  padding: 0.3rem 0;
+
+  > label {
+    background-color: transparent;
+    padding: 0 1rem;
+    cursor: default;
+  }
+
+  & button {
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+
+    min-width: 4rem;
+    line-height: 2rem;
+    padding: 0 1rem;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex: 1;
+
+    &:disabled {
+      color: gray;
+    }
+
+    &:hover {
+      background-color: var(--mat-menu-item-hover-state-layer-color);
+    }
+  }
+
+  &__input {
+    border: none;
+    margin: 0 0.3rem;
+  }
+}
+
+@mixin cdk-menu-color($theme) {
+  .cdk-menu {
+    background-color: mat.get-theme-color($theme, surface-container-high);
+    color: mat.get-theme-color($theme, on-surface);
+
+    &__input {
+      background-color: mat.get-theme-color($theme, surface-container-lowest);
+      color: inherit;
+    }
+  }
+}
