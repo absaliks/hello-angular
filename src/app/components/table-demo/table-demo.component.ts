@@ -20,7 +20,14 @@ export class TableDemoComponent {
     {field: 'price', title: 'Price', type: 'number'},
     {field: 'isInStock', title: 'In Stock', type: 'bool'},
     {field: 'isOnDisplay', title: 'On Display', type: 'bool'},
-    {field: 'createdOn', title: 'Created On', type: 'date'},
+    {
+      field: 'createdOn',
+      title: 'Created On',
+      type: 'date',
+      filters: [
+        {label: 'is in future', predicate: value => new Date(value as string).getFullYear() > 2024}
+      ]
+    },
   ];
 
   readonly data: TestItem[] = [
