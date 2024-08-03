@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, computed, effect, input, ViewChild } from '@angular/core';
-import { coerceColumn, Column, ColumnFilter } from "./column.model";
+import { coerceColumn, Column } from "./column.model";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { MatSort, MatSortModule } from "@angular/material/sort";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
